@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/bbland/code/koality/agles/ci/platform/koality.egg-info'
+let g:netrw_dirhist_2='/Users/bbland/code/koality/model-connection/.git'
+let g:netrw_dirhist_3='/Users/bbland/.virtualenvs/koality/lib/python2.7/site-packages/kombu'
+let g:netrw_dirhist_4='/Users/bbland/code/test/salesforce-test'
+let g:netrw_dirhist_5='/Users/bbland/code/test/appengine/test/build'
+let g:netrw_dirhist_6='/Users/bbland/.oh-my-zsh'

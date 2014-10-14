@@ -1,0 +1,83 @@
+# GIT PROMPT CONFIG
+
+# http://kriener.org/articles/2009/06/04/zsh-prompt-magic
+# http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#SEC273
+# http://eseth.org/2010/git-in-zsh/
+
+. ~/.zshcolors
+
+setopt prompt_subst
+autoload -Uz vcs_info
+
+
+# set formats
+# %b - branchname
+# %u - unstagedstr (see below)
+# %c - stangedstr (see below)
+# %a - action (e.g. rebase-i)
+# %R - repository path
+# %S - path in the repository
+FMT_BRANCH="${PR_GREEN}%b%u%c${PR_RESET}" # e.g. master¹²
+FMT_ACTION="(${PR_RED}%a${PR_RESET}%)"   # e.g. (rebase-i)
+FMT_PATH="%r${PR_YELLOW}/%S"              # e.g. ~/repo/subdir
+
+zstyle ':vcs_info:*' enable git svn
+
+# check-for-changes can be really slow.
+# you should disable it, if you work with large repositories
+zstyle ':vcs_info:*:prompt:*' check-for-changes true
+zstyle ':vcs_info:*:prompt:*' unstagedstr '¹'  # display ¹ if there are unstaged changes
+zstyle ':vcs_info:*:prompt:*' stagedstr '²'    # display ² if there are staged changes
+zstyle ':vcs_info:*:prompt:*' actionformats " ${FMT_BRANCH}${FMT_ACTION}" "${FMT_PATH}"
+zstyle ':vcs_info:*:prompt:*' formats       " ${FMT_BRANCH}"              "${FMT_PATH}"
+zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~"     
+# Show count of stashed changes, only works with new zsh
+#function +vi-git-stash() {
+#    local -a stashes
+#
+#    echo ${hook_com[base]}
+#
+#    if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+#        stashes=$(git stash list 2>/dev/null | wc -l)
+#        hook_com[misc]+=" (${stashes} stashed)"
+#    fi
+#}
+#zstyle ':vcs_info:*+set-message:*' hooks git-stash
+#zstyle ':vcs_info:*+*:*' debug true
+
+function precmd {
+    vcs_info 'prompt'
+	VIRTUALENV=""
+	if [ $VIRTUAL_ENV ]; then
+		VIRTUALENV="${PR_BRIGHT_YELLOW}$(basename $VIRTUAL_ENV) ${PR_RESET}"
+	fi
+	local unread=$(read_unread_mail_count)
+	UNREAD=""
+	if [ "$unread" != "0" ]; then
+		UNREAD="$PR_BRIGHT_YELLOW $unread"
+	fi
+}
+
+function lprompt {
+    local color1=$1
+    local git='$vcs_info_msg_0_'
+    local unread='$UNREAD'
+	local virtualenv='$VIRTUALENV'
+    PROMPT="${PR_RESET}${virtualenv}${color1}${USERNAME}@%m${unread}${git}$color1] ${PR_RESET}"
+}
+
+function rprompt {
+    local color1=$1
+    local git='$vcs_info_msg_1_'
+    RPROMPT="${PR_RESET}${color1}${git}${PR_RESET}"
+}
+
+lprompt $PR_BRIGHT_CYAN
+rprompt $PR_BRIGHT_GREEN
+
+if [[ `/usr/bin/whoami` == 'root' ]] ; then
+  PS1='%{[01;32m%}ROOT@%m] %{[00m%}'   #green root prompt
+  RPROMPT='%{[01;36m%}%~%{[00m%}'
+fi
+
+# END GIT PROMPT CONFIG
