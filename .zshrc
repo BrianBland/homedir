@@ -145,6 +145,7 @@ compinit
 
 #export GOROOT=/usr/local/Cellar/go/1.1.2
 export GOPATH=$HOME/code/go
+PATH=$GOPATH/bin:$PATH
 
 boot2docker shellinit > /dev/null 2>&1 && $(boot2docker shellinit)
 
@@ -156,3 +157,5 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 export STACKER_WORKSPACE=/Users/bbland/code/docker
+
+export PATH

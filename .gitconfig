@@ -1,3 +1,31 @@
 [user]
 	name = Brian Bland
 	email = brian.bland@docker.com
+[log]
+	decorate = true
+[push]
+	default = simple
+[branch]
+	autosetuprebase = always
+[color]
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow
+	frag = cyan bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[log]
+	decorate = short
+[alias]
+	rma = !git ls-files -d | xargs git rm
+	glog = log --all --date-order --graph --format=\"%C(yellow bold)%h %C(cyan bold)%an%C(red bold)%d%Creset %s %C(green bold)%N%Creset\"
+	wdiff = diff --color-words
+	track = !git branch -u origin/$(git symbolic-ref --short HEAD)
