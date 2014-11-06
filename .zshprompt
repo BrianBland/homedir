@@ -46,7 +46,7 @@ zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~"
 #zstyle ':vcs_info:*+*:*' debug true
 
 function precmd {
-    vcs_info 'prompt'
+	vcs_info 'prompt'
 	VIRTUALENV=""
 	if [ $VIRTUAL_ENV ]; then
 		VIRTUALENV="${PR_BRIGHT_YELLOW}$(basename $VIRTUAL_ENV) ${PR_RESET}"
@@ -59,11 +59,12 @@ function precmd {
 }
 
 function lprompt {
-    local color1=$1
-    local git='$vcs_info_msg_0_'
-    local unread='$UNREAD'
+	local color1=$1
+	local git='$vcs_info_msg_0_'
+	local unread='$UNREAD'
 	local virtualenv='$VIRTUALENV'
-    PROMPT="${PR_RESET}${virtualenv}${color1}${USERNAME}@%m${unread}${git}$color1] ${PR_RESET}"
+	local exitstatus='%(?.. ${PR_BRIGHT_RED}%?)'
+    PROMPT="${PR_RESET}${virtualenv}${color1}${USERNAME}@%m${unread}${git}${exitstatus}$color1] ${PR_RESET}"
 }
 
 function rprompt {
@@ -75,9 +76,9 @@ function rprompt {
 lprompt $PR_BRIGHT_CYAN
 rprompt $PR_BRIGHT_GREEN
 
-if [[ `/usr/bin/whoami` == 'root' ]] ; then
-  PS1='%{[01;32m%}ROOT@%m] %{[00m%}'   #green root prompt
-  RPROMPT='%{[01;36m%}%~%{[00m%}'
-fi
+# if [[ `/usr/bin/whoami` == 'root' ]] ; then
+#   PS1='%{[01;32m%}ROOT@%m] %{[00m%}'   #green root prompt
+#   RPROMPT='%{[01;36m%}%~%{[00m%}'
+# fi
 
 # END GIT PROMPT CONFIG
