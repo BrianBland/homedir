@@ -1,6 +1,6 @@
 [user]
 	name = Brian Bland
-	email = brian.bland@docker.com
+	email = brian.t.bland@gmail.com
 [log]
 	decorate = true
 [push]
@@ -29,3 +29,6 @@
 	glog = log --all --date-order --graph --format=\"%C(yellow bold)%h %C(cyan bold)%an%C(red bold)%d%Creset %s %C(green bold)%N%Creset\"
 	wdiff = diff --color-words
 	track = !git branch -u origin/$(git symbolic-ref --short HEAD)
+	fetchpr = "!f() { if [ $# -gt 1 ]; then remote=$1; pr=$2; else remote=upstream; pr=$1; fi; git fetch $remote refs/pull/$pr/head:pr$pr; }; f"
+[core]
+	excludesfile = /Users/bbland/.gitignore
