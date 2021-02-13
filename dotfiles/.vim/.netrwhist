@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/brianbland/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting'
+let g:netrw_dirhist_2='/Users/brianbland/code/patisserie/models'
+let g:netrw_dirhist_3='/Users/brianbland/code/custody/polkadot/.circleci'

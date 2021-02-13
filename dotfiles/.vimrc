@@ -42,7 +42,7 @@ set smartcase
 " show the `best match so far' as search strings are typed:
 set incsearch
 
-" unhilight search terms with space barr
+" unhilight search terms with space bar
 map <Space> :nohl<CR>
 
 " Allow <BkSpc> to delete line breaks, beyond the start of the current
@@ -64,6 +64,8 @@ else
 	set list listchars=tab:.\ ,trail:.,extends:>
 endif
 
-" Sets the colorsheme to the oceandeep colorschem
-colorscheme devbox-dark-256
+" Sets the colorscheme
+" colorscheme devbox-dark-256
 
+" Enables ctrl+p mode
+set runtimepath^=~/.vim/bundle/ctrlp.vim
